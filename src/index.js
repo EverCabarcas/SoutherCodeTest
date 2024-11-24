@@ -86,15 +86,15 @@ app.use(errorHandler)
  *                   type: string
  *                   example: "Error details"
  */
-app.post('/register-user', validateActionLogin,  async (req, res) => {
-  const { email, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = { id: Date.now().toString(), email, password: hashedPassword };
+app.post('/register-user', validateActionLogin, async (req, res) => {
+  const { email, password } = req.body
+  const hashedPassword = await bcrypt.hash(password, 10)
+  const user = { id: Date.now().toString(), email, password: hashedPassword }
   try {
-    await saveUser(user);
-    res.status(201).json({ message: 'User registered successfully' });
+    await saveUser(user)
+    res.status(201).json({ message: 'User registered successfully' })
   } catch (err) {
-    res.status(500).json({ message: 'Error registering user', error: err });
+    res.status(500).json({ message: 'Error registering user', error: err })
   }
 })
 
