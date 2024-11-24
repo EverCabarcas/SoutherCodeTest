@@ -14,6 +14,9 @@ import passport from 'passport'
 const router = express.Router()
 const cache = apicache.middleware
 
+const cacheDuration = process.env.CACHE_EXPIRATION_TIME;
+
+
 /**
  * @swagger
  * /vehicles/{id}:
@@ -41,7 +44,7 @@ const cache = apicache.middleware
 router.get(
   '/vehicles/:id',
   passport.authenticate('jwt', { session: false }),
-  cache(process.env.CACHE_EXPIRATION_TIME),
+  cache(cacheDuration),
   getVehicle,
 )
 
@@ -73,7 +76,7 @@ router.get(
  */
 router.get(
   '/vehicles/:id/doors',
-  cache(process.env.CACHE_EXPIRATION_TIME),
+  cache(cacheDuration),
   getVehicleDoors,
 )
 
@@ -103,7 +106,7 @@ router.get(
  */
 router.get(
   '/vehicles/:id/fuel',
-  cache(process.env.CACHE_EXPIRATION_TIME),
+  cache(cacheDuration),
   getVehicleFuel,
 )
 
@@ -136,7 +139,7 @@ router.get(
  */
 router.get(
   '/vehicles/:id/battery',
-  cache(process.env.CACHE_EXPIRATION_TIME),
+  cache(cacheDuration),
   getVehicleBattery,
 )
 

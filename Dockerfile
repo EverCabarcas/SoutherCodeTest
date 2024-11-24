@@ -7,7 +7,11 @@ WORKDIR /usr/src/server
 
 COPY package*.json ./
 
+# install dependencies
 RUN npm install
+
+# Install redis-tools for testing
+RUN apt-get update && apt-get install -y redis-tools
 
 COPY . .
 

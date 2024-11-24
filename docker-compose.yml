@@ -9,9 +9,16 @@ services:
     environment:
       - PORT=4004
       - OLD_API_BASE_URL=http://gmapi.azurewebsites.net/
-      - CACHE_EXPIRATION_TIME="2 minutes"
+      - CACHE_EXPIRATION_TIME=2 minutes
       - JWT_SECRET_KEY="9d3aa3e95cf04a57491d8e75ded756dc5504e801c71e802b317b7bb1915d29e9"
-      - REDIS_HOST="localhost"
+      - REDIS_HOST=redis
       - REDIS_PORT=6379
+    depends_on:
+      - redis
     volumes:
       - .:/usr/src/server
+  redis:
+    image: 'redis:alpine'
+    container_name: rediscontainer
+    ports:
+      - '6379:6379'
