@@ -53,6 +53,19 @@ To format the code using Prettier, run:
 
 The ESLint configuration is defined in eslint.config.js. It includes rules for Prettier integration and custom rules for JavaScript files.
 
+### Redis
+
+Ensure you have installed the redis in your local.
+Install Redis using Homebrew:
+brew install redis
+
+Start the Redis server:
+brew services start redis
+
+Verify that Redis is running:
+redis-cli ping
+
+
 ### Prettier
 
 The Prettier configuration is defined in .prettierrc. It specifies the code formatting rules such as single quotes, no semicolons, and a print width of 80 characters.

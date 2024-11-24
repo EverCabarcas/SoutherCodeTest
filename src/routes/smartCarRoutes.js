@@ -6,8 +6,10 @@ import {
   getVehicleDoors,
   getVehicleFuel,
 } from '../controllers/smartCarControllers.js'
-import { validateActionVehicleEngine } from '../middlewares/smartCarValidatorHandling.js'
+import { validateActionLogin, validateActionVehicleEngine } from '../middlewares/smartCarValidatorHandling.js'
 import apicache from 'apicache'
+import { login } from '../services/authService.js'
+import passport from 'passport'
 
 const router = express.Router()
 const cache = apicache.middleware
@@ -38,7 +40,8 @@ const cache = apicache.middleware
  */
 router.get(
   '/vehicles/:id',
-  cache(process.env.CAHCE_EXPIRATION_TIME),
+  passport.authenticate('jwt', { session: false }),
+  cache(process.env.CACHE_EXPIRATION_TIME),
   getVehicle,
 )
 
@@ -70,7 +73,7 @@ router.get(
  */
 router.get(
   '/vehicles/:id/doors',
-  cache(process.env.CAHCE_EXPIRATION_TIME),
+  cache(process.env.CACHE_EXPIRATION_TIME),
   getVehicleDoors,
 )
 
@@ -100,7 +103,7 @@ router.get(
  */
 router.get(
   '/vehicles/:id/fuel',
-  cache(process.env.CAHCE_EXPIRATION_TIME),
+  cache(process.env.CACHE_EXPIRATION_TIME),
   getVehicleFuel,
 )
 
@@ -133,7 +136,7 @@ router.get(
  */
 router.get(
   '/vehicles/:id/battery',
-  cache(process.env.CAHCE_EXPIRATION_TIME),
+  cache(process.env.CACHE_EXPIRATION_TIME),
   getVehicleBattery,
 )
 
@@ -171,5 +174,7 @@ router.post(
   validateActionVehicleEngine,
   actionVehicleEngine,
 )
+
+router.post('/login', validateActionLogin, login)
 
 export default router

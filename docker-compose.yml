@@ -8,6 +8,10 @@ services:
     tty: true
     environment:
       - PORT=4004
-      - DATABASE_URL=http://gmapi.azurewebsites.net/
+      - OLD_API_BASE_URL=http://gmapi.azurewebsites.net/
+      - CACHE_EXPIRATION_TIME="2 minutes"
+      - JWT_SECRET_KEY="9d3aa3e95cf04a57491d8e75ded756dc5504e801c71e802b317b7bb1915d29e9"
+      - REDIS_HOST="localhost"
+      - REDIS_PORT=6379
     volumes:
       - .:/usr/src/server

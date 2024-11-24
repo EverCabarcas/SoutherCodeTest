@@ -6,6 +6,10 @@ import smartCarRoutes from './routes/smartCarRoutes.js'
 import { errorHandler } from './middlewares/smartCarErrorHandling.js'
 import helmet from 'helmet'
 import cors from 'cors'
+import bcrypt from 'bcryptjs'
+import { saveUser } from './services/authService.js'
+import { validateActionLogin } from './middlewares/smartCarValidatorHandling.js'
+import redisClient from './redis/redisClient.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -35,6 +39,20 @@ app.use('/api', smartCarRoutes)
 // Middleware to handle errors
 app.use(errorHandler)
 
+// Register user
+app.post('/register-user', validateActionLogin,  async (req, res) => {
+  const { email, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = { id: Date.now().toString(), email, password: hashedPassword };
+  try {
+    await saveUser(user);
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error registering user', error: err });
+  }
+})
+
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`)
 })
