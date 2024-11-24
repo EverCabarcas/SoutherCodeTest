@@ -6,15 +6,20 @@ import {
   getVehicleDoors,
   getVehicleFuel,
 } from '../controllers/smartCarControllers.js'
-import { validateActionVehicleEngine } from '../middlewares/smartCarValidatorHandling.js'
+import { validateActionLogin, validateActionVehicleEngine } from '../middlewares/smartCarValidatorHandling.js'
 import apicache from 'apicache'
+import { login } from '../services/authService.js'
+import passport from 'passport'
 
 const router = express.Router()
 const cache = apicache.middleware
 
+const cacheDuration = process.env.CACHE_EXPIRATION_TIME;
+
+
 /**
  * @swagger
- * /vehicles/{id}:
+ * /api/vehicles/{id}:
  *   get:
  *     summary: Get vehicle information
  *     parameters:
@@ -38,13 +43,14 @@ const cache = apicache.middleware
  */
 router.get(
   '/vehicles/:id',
-  cache(process.env.CAHCE_EXPIRATION_TIME),
+  passport.authenticate('jwt', { session: false }),
+  cache(cacheDuration),
   getVehicle,
 )
 
 /**
  * @swagger
- * /vehicles/{id}/doors:
+ * /api/vehicles/{id}/doors:
  *   get:
  *     summary: Get vehicle door status
  *     parameters:
@@ -70,13 +76,13 @@ router.get(
  */
 router.get(
   '/vehicles/:id/doors',
-  cache(process.env.CAHCE_EXPIRATION_TIME),
+  cache(cacheDuration),
   getVehicleDoors,
 )
 
 /**
  * @swagger
- * /vehicles/{id}/fuel:
+ * /api/vehicles/{id}/fuel:
  *   get:
  *     summary: Get vehicle fuel status
  *     parameters:
@@ -100,13 +106,13 @@ router.get(
  */
 router.get(
   '/vehicles/:id/fuel',
-  cache(process.env.CAHCE_EXPIRATION_TIME),
+  cache(cacheDuration),
   getVehicleFuel,
 )
 
 /**
  * @swagger
- * /vehicles/{id}/battery:
+ * /api/vehicles/{id}/battery:
  *   get:
  *     summary: Get vehicle battery status
  *     parameters:
@@ -133,13 +139,13 @@ router.get(
  */
 router.get(
   '/vehicles/:id/battery',
-  cache(process.env.CAHCE_EXPIRATION_TIME),
+  cache(cacheDuration),
   getVehicleBattery,
 )
 
 /**
  * @swagger
- * /vehicles/{id}/engine:
+ * /api/vehicles/{id}/engine:
  *   post:
  *     summary: Perform an action on the vehicle engine
  *     parameters:
@@ -171,5 +177,7 @@ router.post(
   validateActionVehicleEngine,
   actionVehicleEngine,
 )
+
+router.post('/login', validateActionLogin, login)
 
 export default router

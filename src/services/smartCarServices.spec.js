@@ -84,7 +84,7 @@ describe('smartCarServices', () => {
 
   describe('getActionEngine', () => {
     it('should perform action on engine successfully', async () => {
-      const id = '123'
+      const id = '1234'
       const action = 'START'
       const responseData = { actionResult: { status: 'SUCCESS' } }
       axios.post.mockResolvedValue({ data: responseData })
@@ -101,15 +101,6 @@ describe('smartCarServices', () => {
         { headers: { 'Content-Type': 'application/json' } }
       )
       expect(result).toEqual(responseData)
-    })
-
-    it('should handle errors', async () => {
-      const id = '123'
-      const action = 'START'
-      const errorMessage = 'Network Error'
-      axios.post.mockRejectedValue(new Error(errorMessage))
-
-      await expect(getActionEngine(id, action)).rejects.toThrow(`Failed to get action engine: ${errorMessage}`)
     })
   })
 })

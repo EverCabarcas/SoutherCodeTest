@@ -1,4 +1,8 @@
 import axios from 'axios'
+import {
+  VEHICLE_ACTIONS_OBJECT,
+  VEHICLE_COMMANDS_OBJECT,
+} from '../utils/smartCarConstants.js'
 
 const OLD_API_BASE_URL = process.env.OLD_API_BASE_URL
 
@@ -58,25 +62,19 @@ export const getActionEngine = async (id, action) => {
     id,
     command:
       action === VEHICLE_ACTIONS_OBJECT.START
-        ? VEHICLE_COMMANDS_OBJEC.START_VEHICLE
-        : VEHICLE_COMMANDS_OBJECTT.STOP_VEHICLE,
+        ? VEHICLE_COMMANDS_OBJECT.START_VEHICLE
+        : VEHICLE_COMMANDS_OBJECT.STOP_VEHICLE,
     responseType: 'JSON',
   }
-  try {
-    const response = await axios.post(
-      `${OLD_API_BASE_URL}/actionEngineService`,
-      body,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
+  const response = await axios.post(
+    `${OLD_API_BASE_URL}/actionEngineService`,
+    body,
+    {
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
-    if (response.status !== 200) {
-      throw new Error(`API responded with status code ${response.status}`)
-    }
-    return response.data
-  } catch (error) {
-    throw new Error(`Failed to get action engine: ${error.message}`)
-  }
+    },
+  )
+  return response.data
 }

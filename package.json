@@ -9,7 +9,8 @@
     "dev": "nodemon ./src/index.js",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install"
   },
   "keywords": [
     "southern",
@@ -22,11 +23,16 @@
   "dependencies": {
     "apicache": "1.6.3",
     "axios": "1.7.7",
+    "bcryptjs": "2.4.3",
     "cors": "2.8.5",
     "dotenv": "16.4.5",
     "express": "4.21.1",
     "helmet": "8.0.0",
     "joi": "17.13.3",
+    "jsonwebtoken": "9.0.2",
+    "passport": "0.7.0",
+    "passport-jwt": "4.0.1",
+    "redis": "4.7.0",
     "swagger-jsdoc": "6.2.8",
     "swagger-ui-express": "5.0.1",
     "xss-clean": "0.1.4"
@@ -40,6 +46,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-prettier": "5.2.1",
+    "husky": "9.1.7",
     "jest": "29.7.0",
     "nodemon": "3.1.7",
     "prettier": "3.3.3"
