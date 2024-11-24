@@ -1,0 +1,13 @@
+services:
+  backend:
+    build: .
+    container_name: becontainer
+    ports:
+      - '4004:4004'
+    stdin_open: true
+    tty: true
+    environment:
+      - PORT=4004
+      - DATABASE_URL=http://gmapi.azurewebsites.net/
+    volumes:
+      - .:/usr/src/server
