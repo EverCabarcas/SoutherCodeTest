@@ -10,11 +10,11 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000/api',
+        url: 'http://localhost:3000',
       },
     ],
   },
-  apis: ['src/routes/*.js' , './src/controllers/*.js'], // Paths to files containing OpenAPI definitions
+  apis: ['./src/routes/*.js' , './src/controllers/*.js', './src/index.js'], // Paths to files containing OpenAPI definitions
 }
 
 const specs = swaggerJsdoc(options)

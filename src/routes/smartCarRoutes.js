@@ -19,7 +19,7 @@ const cacheDuration = process.env.CACHE_EXPIRATION_TIME;
 
 /**
  * @swagger
- * /vehicles/{id}:
+ * /api/vehicles/{id}:
  *   get:
  *     summary: Get vehicle information
  *     parameters:
@@ -50,7 +50,7 @@ router.get(
 
 /**
  * @swagger
- * /vehicles/{id}/doors:
+ * /api/vehicles/{id}/doors:
  *   get:
  *     summary: Get vehicle door status
  *     parameters:
@@ -82,7 +82,7 @@ router.get(
 
 /**
  * @swagger
- * /vehicles/{id}/fuel:
+ * /api/vehicles/{id}/fuel:
  *   get:
  *     summary: Get vehicle fuel status
  *     parameters:
@@ -112,7 +112,7 @@ router.get(
 
 /**
  * @swagger
- * /vehicles/{id}/battery:
+ * /api/vehicles/{id}/battery:
  *   get:
  *     summary: Get vehicle battery status
  *     parameters:
@@ -145,7 +145,7 @@ router.get(
 
 /**
  * @swagger
- * /vehicles/{id}/engine:
+ * /api/vehicles/{id}/engine:
  *   post:
  *     summary: Perform an action on the vehicle engine
  *     parameters:

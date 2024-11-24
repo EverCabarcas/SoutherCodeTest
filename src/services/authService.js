@@ -24,11 +24,9 @@ export const getUserByEmail = async email => {
 // Helper function to save user from redis
 export const saveUser = async user => {
   try {
-    console.log(user)
     const savedUser = await redisClient.hSet(user.email, user)
     return savedUser
   } catch (error) {
-    console.log(error)
     throw error
   }
 }

@@ -1,5 +1,6 @@
 import { AVAILABLE_VEHICLES_IDS, VEHICLE_ACTIONS } from './smartCarConstants.js'
 
+//TODO: implement test for this functions
 export const iDValidations = id => {
   if (!id) {
     const error = new Error('Vehicle ID is required')

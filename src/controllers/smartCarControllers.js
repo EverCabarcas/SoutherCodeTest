@@ -1,3 +1,8 @@
+/**
+ * TODO: NOTE - the error handling for all the functions in the controller is implementend
+ * in the middleware error handler, so we dont need to handle the errors in the controlller
+ * and we have a consistent way to handle errors in the application and a cleaner code.
+ */
 import {
   getActionEngine,
   getEnergyStatus,
@@ -47,7 +52,7 @@ import { actionValidations, iDValidations } from '../utils/smartCarUtils.js'
 
 /**
  * @swagger
- * /vehicles/{id}:
+ * /api/vehicles/{id}:
  *   get:
  *     summary: Get vehicle information
  *     parameters:
@@ -97,7 +102,7 @@ export const getVehicle = async (req, res, next) => {
 
 /**
  * @swagger
- * /vehicles/{id}/doors:
+ * /api/vehicles/{id}/doors:
  *   get:
  *     summary: Get vehicle door status
  *     parameters:
@@ -141,7 +146,7 @@ export const getVehicleDoors = async (req, res, next) => {
 
 /**
  * @swagger
- * /vehicles/{id}/fuel:
+ * /api/vehicles/{id}/fuel:
  *   get:
  *     summary: Get vehicle fuel status
  *     parameters:
@@ -184,7 +189,7 @@ export const getVehicleFuel = async (req, res, next) => {
 
 /**
  * @swagger
- * /vehicles/{id}/battery:
+ * /api/vehicles/{id}/battery:
  *   get:
  *     summary: Get vehicle battery status
  *     parameters:
@@ -227,7 +232,7 @@ export const getVehicleBattery = async (req, res, next) => {
 
 /**
  * @swagger
- * /vehicles/{id}/engine:
+ * /api/vehicles/{id}/engine:
  *   post:
  *     summary: Perform an action on the vehicle engine
  *     parameters:
