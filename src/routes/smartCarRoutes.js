@@ -7,8 +7,10 @@ import {
   getVehicleFuel,
 } from '../controllers/smartCarControllers.js'
 import { validateActionVehicleEngine } from '../middlewares/smartCarValidatorHandling.js'
+import apicache from 'apicache'
 
 const router = express.Router()
+const cache = apicache.middleware
 
 /**
  * @swagger
@@ -34,7 +36,11 @@ const router = express.Router()
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get('/vehicles/:id', getVehicle)
+router.get(
+  '/vehicles/:id',
+  cache(process.env.CAHCE_EXPIRATION_TIME),
+  getVehicle,
+)
 
 /**
  * @swagger
@@ -62,7 +68,11 @@ router.get('/vehicles/:id', getVehicle)
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get('/vehicles/:id/doors', getVehicleDoors)
+router.get(
+  '/vehicles/:id/doors',
+  cache(process.env.CAHCE_EXPIRATION_TIME),
+  getVehicleDoors,
+)
 
 /**
  * @swagger
@@ -88,7 +98,11 @@ router.get('/vehicles/:id/doors', getVehicleDoors)
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get('/vehicles/:id/fuel', getVehicleFuel)
+router.get(
+  '/vehicles/:id/fuel',
+  cache(process.env.CAHCE_EXPIRATION_TIME),
+  getVehicleFuel,
+)
 
 /**
  * @swagger
@@ -117,7 +131,11 @@ router.get('/vehicles/:id/fuel', getVehicleFuel)
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get('/vehicles/:id/battery', getVehicleBattery)
+router.get(
+  '/vehicles/:id/battery',
+  cache(process.env.CAHCE_EXPIRATION_TIME),
+  getVehicleBattery,
+)
 
 /**
  * @swagger
