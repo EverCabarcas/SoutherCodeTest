@@ -14,7 +14,7 @@ const options = {
       },
     ],
   },
-  apis: ['./src/routes/*.js' , './src/controllers/*.js', './src/index.js'], // Paths to files containing OpenAPI definitions
+  apis: ['./src/routes/*.js', './src/controllers/*.js', './src/index.js'], // Paths to files containing OpenAPI definitions
 }
 
 const specs = swaggerJsdoc(options)

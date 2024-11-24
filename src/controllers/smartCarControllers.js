@@ -14,12 +14,15 @@ import { actionValidations, iDValidations } from '../utils/smartCarUtils.js'
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  *   schemas:
- *     VehicleInfo:
+ *     Vehicle:
  *       type: object
  *       properties:
- *         vin:
- *           type: string
  *         color:
  *           type: string
  *         doorCount:
@@ -46,8 +49,10 @@ import { actionValidations, iDValidations } from '../utils/smartCarUtils.js'
  *     EngineStatus:
  *       type: object
  *       properties:
- *        status:
- *         type: string
+ *         status:
+ *           type: string
+ * security:
+ *   - bearerAuth: []
  */
 
 /**
@@ -68,11 +73,13 @@ import { actionValidations, iDValidations } from '../utils/smartCarUtils.js'
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/VehicleInfo'
+ *               $ref: '#/components/schemas/Vehicle'
  *       400:
  *         description: Vehicle ID is required
  *       404:
  *         description: Vehicle ID is not found
+ *     security:
+ *       - bearerAuth: []
  */
 export const getVehicle = async (req, res, next) => {
   try {

@@ -12,6 +12,6 @@ redisClient.on('connect', () => {
   console.log('Connected to Redis')
 })
 
-await redisClient.connect()
+redisClient.connect()
 
 export default redisClient

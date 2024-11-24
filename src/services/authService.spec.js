@@ -6,12 +6,10 @@ import redisClient from '../redis/redisClient'
 import { getUserByEmail, saveUser, login } from './authService'
 
 jest.mock('../redis/redisClient', () => ({
-  hGetAll: jest
-    .fn()
-    .mockImplementation(() => ({
-      email: 'test@example.com',
-      password: 'password',
-    })),
+  hGetAll: jest.fn().mockImplementation(() => ({
+    email: 'test@example.com',
+    password: 'password',
+  })),
   hSet: jest.fn(),
 }))
 

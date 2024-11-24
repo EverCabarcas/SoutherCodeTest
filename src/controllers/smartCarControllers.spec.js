@@ -1,6 +1,17 @@
 // src/controllers/smartCarControllers.spec.js
-import { getVehicle, getVehicleDoors, getVehicleFuel, getVehicleBattery, actionVehicleEngine } from './smartCarControllers'
-import { getVehicleInfo, getSecurityStatus, getEnergyStatus, getActionEngine } from '../services/smartCarServices'
+import {
+  getVehicle,
+  getVehicleDoors,
+  getVehicleFuel,
+  getVehicleBattery,
+  actionVehicleEngine,
+} from './smartCarControllers'
+import {
+  getVehicleInfo,
+  getSecurityStatus,
+  getEnergyStatus,
+  getActionEngine,
+} from '../services/smartCarServices'
 import { iDValidations, actionValidations } from '../utils/smartCarUtils'
 
 jest.mock('../services/smartCarServices')
@@ -20,8 +31,22 @@ describe('smartCarControllers', () => {
     it('should return vehicle information', async () => {
       const req = mockReq({ id: '123' })
       const res = mockRes()
-      const vehicleData = { data: { vin: { value: '1HGCM82633A123456' }, color: { value: 'red' }, driveTrain: { value: 'AWD' } } }
-      const securityData = { data: { doors: { values: [{ location: { value: 'front-left' }, locked: { value: true } }] } } }
+      const vehicleData = {
+        data: {
+          vin: { value: '1HGCM82633A123456' },
+          color: { value: 'red' },
+          driveTrain: { value: 'AWD' },
+        },
+      }
+      const securityData = {
+        data: {
+          doors: {
+            values: [
+              { location: { value: 'front-left' }, locked: { value: true } },
+            ],
+          },
+        },
+      }
 
       iDValidations.mockImplementation(() => {})
       getVehicleInfo.mockResolvedValue(vehicleData)
@@ -58,7 +83,15 @@ describe('smartCarControllers', () => {
     it('should return vehicle door status', async () => {
       const req = mockReq({ id: '123' })
       const res = mockRes()
-      const securityData = { data: { doors: { values: [{ location: { value: 'front-left' }, locked: { value: true } }] } } }
+      const securityData = {
+        data: {
+          doors: {
+            values: [
+              { location: { value: 'front-left' }, locked: { value: true } },
+            ],
+          },
+        },
+      }
 
       iDValidations.mockImplementation(() => {})
       getSecurityStatus.mockResolvedValue(securityData)
@@ -67,7 +100,9 @@ describe('smartCarControllers', () => {
 
       expect(iDValidations).toHaveBeenCalledWith('123')
       expect(getSecurityStatus).toHaveBeenCalledWith('123')
-      expect(res.send).toHaveBeenCalledWith([{ location: 'front-left', locked: true }])
+      expect(res.send).toHaveBeenCalledWith([
+        { location: 'front-left', locked: true },
+      ])
     })
 
     it('should handle errors', async () => {

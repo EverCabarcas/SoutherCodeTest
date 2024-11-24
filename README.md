@@ -22,30 +22,28 @@ The Generic Motors (GM) car company has a terrible API. It returns badly structu
 
 1. Clone the repository:
    git clone <repository-url>
-   
 2. Navigate to the project directory:
    cd southerncodetest
-   
 3. Install the dependencies:
    npm install
 
 ### Running the Project
 
 To start the server, run:
-   npm start
+npm start
 
 To start the server in development mode with nodemon, run:
-   npm run dev
+npm run dev
 
 The server will be running at http://localhost:3000.
 
 ### Linting and Formatting
 
 To lint the code using ESLint, run:
-   npm run lint
+npm run lint
 
 To format the code using Prettier, run:
-   npm run format
+npm run format
 
 ## Project Configuration
 
@@ -64,7 +62,6 @@ brew services start redis
 
 Verify that Redis is running:
 redis-cli ping
-
 
 ### Prettier
 

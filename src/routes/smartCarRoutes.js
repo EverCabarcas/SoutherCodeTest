@@ -6,7 +6,10 @@ import {
   getVehicleDoors,
   getVehicleFuel,
 } from '../controllers/smartCarControllers.js'
-import { validateActionLogin, validateActionVehicleEngine } from '../middlewares/smartCarValidatorHandling.js'
+import {
+  validateActionLogin,
+  validateActionVehicleEngine,
+} from '../middlewares/smartCarValidatorHandling.js'
 import apicache from 'apicache'
 import { login } from '../services/authService.js'
 import passport from 'passport'
@@ -14,8 +17,7 @@ import passport from 'passport'
 const router = express.Router()
 const cache = apicache.middleware
 
-const cacheDuration = process.env.CACHE_EXPIRATION_TIME;
-
+const cacheDuration = process.env.CACHE_EXPIRATION_TIME
 
 /**
  * @swagger
@@ -74,11 +76,7 @@ router.get(
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get(
-  '/vehicles/:id/doors',
-  cache(cacheDuration),
-  getVehicleDoors,
-)
+router.get('/vehicles/:id/doors', cache(cacheDuration), getVehicleDoors)
 
 /**
  * @swagger
@@ -104,11 +102,7 @@ router.get(
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get(
-  '/vehicles/:id/fuel',
-  cache(cacheDuration),
-  getVehicleFuel,
-)
+router.get('/vehicles/:id/fuel', cache(cacheDuration), getVehicleFuel)
 
 /**
  * @swagger
@@ -137,11 +131,7 @@ router.get(
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get(
-  '/vehicles/:id/battery',
-  cache(cacheDuration),
-  getVehicleBattery,
-)
+router.get('/vehicles/:id/battery', cache(cacheDuration), getVehicleBattery)
 
 /**
  * @swagger
@@ -178,6 +168,42 @@ router.post(
   actionVehicleEngine,
 )
 
+/**
+ * @swagger
+ * /api/login:
+ *   post:
+ *     summary: User login
+ *     description: Authenticates a user and returns a token.
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: user@example.com
+ *               password:
+ *                 type: string
+ *                 example: password123
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *       400:
+ *         description: Invalid request
+ *       401:
+ *         description: Unauthorized
+ */
 router.post('/login', validateActionLogin, login)
-
 export default router

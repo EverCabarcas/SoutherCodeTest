@@ -1,6 +1,11 @@
 // src/services/smartCarServices.spec.js
 import axios from 'axios'
-import { getVehicleInfo, getSecurityStatus, getEnergyStatus, getActionEngine } from './smartCarServices'
+import {
+  getVehicleInfo,
+  getSecurityStatus,
+  getEnergyStatus,
+  getActionEngine,
+} from './smartCarServices'
 
 jest.mock('axios')
 
@@ -18,7 +23,7 @@ describe('smartCarServices', () => {
       expect(axios.post).toHaveBeenCalledWith(
         `${OLD_API_BASE_URL}/getVehicleInfoService`,
         { id, responseType: 'JSON' },
-        { headers: { 'Content-Type': 'application/json' } }
+        { headers: { 'Content-Type': 'application/json' } },
       )
       expect(result).toEqual(responseData)
     })
@@ -35,7 +40,9 @@ describe('smartCarServices', () => {
   describe('getSecurityStatus', () => {
     it('should fetch security status successfully', async () => {
       const id = '123'
-      const responseData = { data: { doors: { values: [{ location: 'front-left', locked: true }] } } }
+      const responseData = {
+        data: { doors: { values: [{ location: 'front-left', locked: true }] } },
+      }
       axios.post.mockResolvedValue({ data: responseData })
 
       const result = await getSecurityStatus(id)
@@ -43,7 +50,7 @@ describe('smartCarServices', () => {
       expect(axios.post).toHaveBeenCalledWith(
         `${OLD_API_BASE_URL}/getSecurityStatusService`,
         { id, responseType: 'JSON' },
-        { headers: { 'Content-Type': 'application/json' } }
+        { headers: { 'Content-Type': 'application/json' } },
       )
       expect(result).toEqual(responseData)
     })
@@ -60,7 +67,9 @@ describe('smartCarServices', () => {
   describe('getEnergyStatus', () => {
     it('should fetch energy status successfully', async () => {
       const id = '123'
-      const responseData = { data: { tankLevel: { value: 50 }, batteryLevel: { value: 80 } } }
+      const responseData = {
+        data: { tankLevel: { value: 50 }, batteryLevel: { value: 80 } },
+      }
       axios.post.mockResolvedValue({ data: responseData })
 
       const result = await getEnergyStatus(id)
@@ -68,7 +77,7 @@ describe('smartCarServices', () => {
       expect(axios.post).toHaveBeenCalledWith(
         `${OLD_API_BASE_URL}/getEnergyService`,
         { id, responseType: 'JSON' },
-        { headers: { 'Content-Type': 'application/json' } }
+        { headers: { 'Content-Type': 'application/json' } },
       )
       expect(result).toEqual(responseData)
     })
@@ -98,7 +107,7 @@ describe('smartCarServices', () => {
           command: 'START_VEHICLE',
           responseType: 'JSON',
         },
-        { headers: { 'Content-Type': 'application/json' } }
+        { headers: { 'Content-Type': 'application/json' } },
       )
       expect(result).toEqual(responseData)
     })
