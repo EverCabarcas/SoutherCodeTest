@@ -9,7 +9,6 @@ import cors from 'cors'
 import bcrypt from 'bcryptjs'
 import { saveUser } from './services/authService.js'
 import { validateActionLogin } from './middlewares/smartCarValidatorHandling.js'
-import redisClient from './redis/redisClient.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -31,6 +30,8 @@ app.use(
 app.use(express.json())
 
 // Middleware to serve the Swagger UI
+//TODO: can bemonve to a separate file and also can be improved to serve the swagger UI only in development mode
+// Also add more details to the documentation like more response codes, request body, etc.
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
 
 // Routes

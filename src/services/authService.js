@@ -7,6 +7,7 @@ import redisClient from '../redis/redisClient.js'
 
 const app = express()
 app.use(express.json())
+//TODO: error handling in this file can be improved to give error handling to the middleware in a more proper way
 
 // TODO: We can create a redis client file to store this method
 // Helper function to get user by email from redis
@@ -41,7 +42,7 @@ passport.use(
   new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
     try {
       const user = await getUserByEmail(jwtPayload.email)
-      if (user) {
+      if (user?.email) {
         return done(null, user)
       } else {
         return done(null, false)
@@ -58,7 +59,7 @@ export const login = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await getUserByEmail(email)
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (user?.email && (await bcrypt.compare(password, user?.password))) {
       const token = jwt.sign({ email: user.email }, jwtOptions.secretOrKey)
       res.json({ token })
     } else {

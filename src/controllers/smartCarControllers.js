@@ -132,6 +132,8 @@ export const getVehicle = async (req, res, next) => {
  *         description: Vehicle ID is required
  *       404:
  *         description: Vehicle ID is not found
+ *     security:
+ *       - bearerAuth: []
  */
 export const getVehicleDoors = async (req, res, next) => {
   try {
@@ -174,6 +176,8 @@ export const getVehicleDoors = async (req, res, next) => {
  *         description: Vehicle ID is required
  *       404:
  *         description: Vehicle ID is not found
+ *     security:
+ *       - bearerAuth: []
  */
 export const getVehicleFuel = async (req, res, next) => {
   try {
@@ -217,6 +221,8 @@ export const getVehicleFuel = async (req, res, next) => {
  *         description: Vehicle ID is required
  *       404:
  *         description: Vehicle ID is not found
+ *     security:
+ *       - bearerAuth: []
  */
 export const getVehicleBattery = async (req, res, next) => {
   try {
@@ -265,6 +271,8 @@ export const getVehicleBattery = async (req, res, next) => {
  *         description: Invalid request
  *       404:
  *         description: Vehicle ID not found
+ *     security:
+ *       - bearerAuth: []
  */
 export const actionVehicleEngine = async (req, res, next) => {
   try {

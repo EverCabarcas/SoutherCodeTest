@@ -34,8 +34,7 @@
     "passport-jwt": "4.0.1",
     "redis": "4.7.0",
     "swagger-jsdoc": "6.2.8",
-    "swagger-ui-express": "5.0.1",
-    "xss-clean": "0.1.4"
+    "swagger-ui-express": "5.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.26.0",
