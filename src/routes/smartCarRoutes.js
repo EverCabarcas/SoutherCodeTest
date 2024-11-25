@@ -76,7 +76,12 @@ router.get(
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get('/vehicles/:id/doors', cache(cacheDuration), getVehicleDoors)
+router.get(
+  '/vehicles/:id/doors',
+  passport.authenticate('jwt', { session: false }),
+  cache(cacheDuration),
+  getVehicleDoors,
+)
 
 /**
  * @swagger
@@ -102,7 +107,12 @@ router.get('/vehicles/:id/doors', cache(cacheDuration), getVehicleDoors)
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get('/vehicles/:id/fuel', cache(cacheDuration), getVehicleFuel)
+router.get(
+  '/vehicles/:id/fuel',
+  passport.authenticate('jwt', { session: false }),
+  cache(cacheDuration),
+  getVehicleFuel,
+)
 
 /**
  * @swagger
@@ -131,7 +141,12 @@ router.get('/vehicles/:id/fuel', cache(cacheDuration), getVehicleFuel)
  *       404:
  *         description: Vehicle ID is not found
  */
-router.get('/vehicles/:id/battery', cache(cacheDuration), getVehicleBattery)
+router.get(
+  '/vehicles/:id/battery',
+  passport.authenticate('jwt', { session: false }),
+  cache(cacheDuration),
+  getVehicleBattery,
+)
 
 /**
  * @swagger
@@ -164,6 +179,7 @@ router.get('/vehicles/:id/battery', cache(cacheDuration), getVehicleBattery)
  */
 router.post(
   '/vehicles/:id/engine',
+  passport.authenticate('jwt', { session: false }),
   validateActionVehicleEngine,
   actionVehicleEngine,
 )
@@ -202,8 +218,6 @@ router.post(
  *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  *       400:
  *         description: Invalid request
- *       401:
- *         description: Unauthorized
  */
 router.post('/login', validateActionLogin, login)
 export default router
