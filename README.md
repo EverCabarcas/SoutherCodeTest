@@ -81,7 +81,7 @@ To start the app using Docker, run:
 ```bash
 docker-compose up --build
 ```
-Be sure have docker install in your machine https://docs.docker.com/engine/install/
+> docker-compose.yml also use the .env remember to change according to your enviroments if needed. Be sure have docker install in your machine https://docs.docker.com/engine/install/
 
 
 ### Linting and Formatting
@@ -101,6 +101,13 @@ npm run format
 ### ESLint
 
 The ESLint configuration is defined in eslint.config.js. It includes rules for Prettier integration and custom rules for JavaScript files.
+
+### Coverage
+
+The general coverage can be run using:
+```bash
+npm run test
+```
 
 ### Redis
 

@@ -285,6 +285,8 @@ export const actionVehicleEngine = async (req, res, next) => {
 
     const getActionEngineData = await getActionEngine(id, action)
 
+    //TODO: I am assuming returning the response from the API, but we need to check if this is the correct response
+    // because in the document says in the example success|error don't know if a transformation is needed.
     res.send({ status: getActionEngineData?.actionResult?.status })
   } catch (error) {
     next(error)
