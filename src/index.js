@@ -40,6 +40,7 @@ app.use('/api', smartCarRoutes)
 // Middleware to handle errors
 app.use(errorHandler)
 
+// TODO: we can create a basic authentication for this route using an especial secret in order to avoid unauthorized access
 /**
  * @swagger
  * /register-user:
