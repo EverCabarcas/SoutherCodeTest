@@ -4,6 +4,7 @@ The Generic Motors (GM) car company has a terrible API. It returns badly structu
 
 ## Project Structure
 
+```bash
 .
 ├── .env
 ├── .env.example
@@ -31,6 +32,7 @@ The Generic Motors (GM) car company has a terrible API. It returns badly structu
 │ ├── utils/
 │ ├── validators/
 ├── swaggerConfig.js
+```
 
 ## Getting Started
 
@@ -45,19 +47,19 @@ The Generic Motors (GM) car company has a terrible API. It returns badly structu
 
 1. Clone the repository:
 
-```
+```bash
 git clone https://github.com/EverCabarcas/SoutherCodeTest.git
 ```
 
 2. Navigate to the project directory:
 
-```
+```bash
 cd southerncodetest
 ```
 
 3. Install the dependencies:
 
-```
+```bash
 npm install
 ```
 
@@ -65,18 +67,18 @@ npm install
 
 To start the server, run:
 
-```
+```bash
 npm start
 ```
 
 To start the server in development mode with nodemon, run:
-```
+```bash
 npm run dev
 ```
 The server will be running at http://localhost:3000. be sure to add your env variables
 
 To start the app using Docker, run:
-```
+```bash
 docker-compose up --build
 ```
 Be sure have docker install in your machine https://docs.docker.com/engine/install/
@@ -85,12 +87,12 @@ Be sure have docker install in your machine https://docs.docker.com/engine/insta
 ### Linting and Formatting
 
 To lint the code using ESLint, run:
-```
+```bash
 npm run lint
 ```
 
 To format the code using Prettier, run:
-```
+```bash
 npm run format
 ```
 
@@ -105,17 +107,17 @@ The ESLint configuration is defined in eslint.config.js. It includes rules for P
 Ensure you have installed the redis in your local (When no docker conifg is used).
 
 Install Redis using Homebrew:
-```
+```bash
 brew install redis
 ```
 
 Start the Redis server:
-```
+```bash
 brew services start redis
 ```
 
 Verify that Redis is running:
-```
+```bash
 redis-cli ping
 ```
 
@@ -142,7 +144,7 @@ The Prettier configuration is defined in .prettierrc. It specifies the code form
 NOTE: Remember to Register an user before you try to get information from the endpoints
 ``
 
-``` 
+```
 Afer you run the project you can find the swagger docs in
 > http://localhost:{YOUR_PORT}/api-docs/#/
 
