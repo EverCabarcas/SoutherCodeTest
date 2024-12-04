@@ -1,0 +1,45 @@
+name: CI Southern Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Husky
+        run: npx husky install
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build Docker image
+        run: docker build -t everca/southerncodetest:latest .
+
+    #   - name: Security scan with Snyk ---> to implement in the future many warnigns to take care in this stage
+    #     uses: snyk/actions/docker@master
+    #     with:
+    #       image: everca/southerncodetest:latest
+    #       args: --file=Dockerfile
+    #     env:
+    #       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

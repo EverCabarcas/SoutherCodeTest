@@ -161,6 +161,9 @@ Remember to put only the <Token>
 Please do not use Bearer <Token> in Authorize button
 ```
 
+## CI/CD Pipeline
+
+Was build using Github Actions for this stage we only focus on the CI and the docker build still missing the CD part to publish to a container.
 
 ## Author
 
