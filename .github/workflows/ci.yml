@@ -35,3 +35,9 @@ jobs:
       
       - name: Build Docker image
         run: docker build -t everca/southerncodetest:latest .
+
+      - name: Security scan with Snyk
+        uses: snyk/actions/docker@master
+        with:
+          image: everca/southerncodetest:latest
+          args: --file=Dockerfile
