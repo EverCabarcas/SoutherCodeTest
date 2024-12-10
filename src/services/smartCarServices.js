@@ -3,6 +3,8 @@ import {
   VEHICLE_ACTIONS_OBJECT,
   VEHICLE_COMMANDS_OBJECT,
 } from '../utils/smartCarConstants.js'
+import logger from '../logger/logger.js'
+import { validateErrorInBody } from '../utils/smartCarUtils.js'
 
 const OLD_API_BASE_URL = process.env.OLD_API_BASE_URL
 
@@ -20,6 +22,8 @@ export const getVehicleInfo = async id => {
       },
     },
   )
+  logger.info(`Vehicle Data: ${JSON.stringify(response.data)}`)
+  validateErrorInBody(response.data)
   return response.data
 }
 
@@ -37,6 +41,8 @@ export const getSecurityStatus = async id => {
       },
     },
   )
+  logger.info(`Security Status: ${JSON.stringify(response.data)}`)
+  validateErrorInBody(response.data)
   return response.data
 }
 
@@ -54,6 +60,8 @@ export const getEnergyStatus = async id => {
       },
     },
   )
+  logger.info(`Energy Status: ${JSON.stringify(response.data)}`)
+  validateErrorInBody(response.data)
   return response.data
 }
 
@@ -76,5 +84,7 @@ export const getActionEngine = async (id, action) => {
       },
     },
   )
+  logger.info(`Action Engine: ${JSON.stringify(response.data)}`)
+  validateErrorInBody(response.data)
   return response.data
 }

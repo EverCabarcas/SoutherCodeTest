@@ -11,3 +11,8 @@ export const VEHICLE_ACTIONS_OBJECT = {
   START: 'START',
   STOP: 'STOP',
 }
+
+export const VEHICLE_ACTIONS_RESULT = {
+  EXECUTED: 'EXECUTED',
+  FAILED: 'FAILED',
+}
