@@ -9,6 +9,7 @@ import cors from 'cors'
 import bcrypt from 'bcryptjs'
 import { saveUser } from './services/authService.js'
 import { validateActionLogin } from './middlewares/smartCarValidatorHandling.js'
+import logger from './logger/logger.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -94,8 +95,10 @@ app.post('/register-user', validateActionLogin, async (req, res) => {
   const user = { id: Date.now().toString(), email, password: hashedPassword }
   try {
     await saveUser(user)
+    logger.info('User registered successfully')
     res.status(201).json({ message: 'User registered successfully' })
   } catch (err) {
+    logger.error(`Error registering user: ${err}`)
     res.status(500).json({ message: 'Error registering user', error: err })
   }
 })

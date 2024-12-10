@@ -10,6 +10,8 @@ import {
   getVehicleInfo,
 } from '../services/smartCarServices.js'
 import { actionValidations, iDValidations } from '../utils/smartCarUtils.js'
+import logger from '../logger/logger.js'
+import { VEHICLE_ACTIONS_RESULT } from '../utils/smartCarConstants.js'
 
 /**
  * @swagger
@@ -83,8 +85,10 @@ import { actionValidations, iDValidations } from '../utils/smartCarUtils.js'
  */
 export const getVehicle = async (req, res, next) => {
   try {
+    logger.info('Get Vehicle')
     const { id } = req.params
     // check if id is provided and in the list of available vehicles ids
+    logger.info(`Vehicle ID: ${id}`)
     iDValidations(id)
 
     const vehicleData = await getVehicleInfo(id)
@@ -137,6 +141,7 @@ export const getVehicle = async (req, res, next) => {
  */
 export const getVehicleDoors = async (req, res, next) => {
   try {
+    logger.info('Get Vehicle Doors')
     const { id } = req.params
     // check if id is provided and in the list of available vehicles ids
     iDValidations(id)
@@ -181,6 +186,7 @@ export const getVehicleDoors = async (req, res, next) => {
  */
 export const getVehicleFuel = async (req, res, next) => {
   try {
+    logger.info('Get Vehicle Fuel')
     const { id } = req.params
     // check if id is provided and in the list of available vehicles ids
     iDValidations(id)
@@ -191,6 +197,7 @@ export const getVehicleFuel = async (req, res, next) => {
      */
     const energyStatusData = await getEnergyStatus(id)
     const tankLevelPercent = energyStatusData?.data?.tankLevel?.value
+    logger.info(`Tank Level Percent: ${tankLevelPercent}`)
 
     res.send({ percent: tankLevelPercent })
   } catch (error) {
@@ -226,6 +233,7 @@ export const getVehicleFuel = async (req, res, next) => {
  */
 export const getVehicleBattery = async (req, res, next) => {
   try {
+    logger.info('Get Vehicle Battery')
     const { id } = req.params
     // check if id is provided and in the list of available vehicles ids
     iDValidations(id)
@@ -236,6 +244,7 @@ export const getVehicleBattery = async (req, res, next) => {
      */
     const energyStatusData = await getEnergyStatus(id)
     const batteryLevelPercent = energyStatusData?.data?.batteryLevel?.value
+    logger.info(`Battery Level Percent: ${batteryLevelPercent}`)
 
     res.send({ percent: batteryLevelPercent })
   } catch (error) {
@@ -287,6 +296,17 @@ export const actionVehicleEngine = async (req, res, next) => {
 
     //TODO: I am assuming returning the response from the API, but we need to check if this is the correct response
     // because in the document says in the example success|error don't know if a transformation is needed.
+    if (
+      getActionEngineData?.actionResult?.status ===
+      VEHICLE_ACTIONS_RESULT.FAILED
+    ) {
+      logger.error(
+        `Action failed response: ${getActionEngineData?.actionResult?.status}`,
+      )
+      const error = new Error('Action failed')
+      error.status = 400
+      throw error
+    }
     res.send({ status: getActionEngineData?.actionResult?.status })
   } catch (error) {
     next(error)

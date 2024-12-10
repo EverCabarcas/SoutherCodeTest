@@ -72,26 +72,31 @@ npm start
 ```
 
 To start the server in development mode with nodemon, run:
+
 ```bash
 npm run dev
 ```
+
 The server will be running at http://localhost:3000. be sure to add your env variables
 
 To start the app using Docker, run:
+
 ```bash
 docker-compose up --build
 ```
-> docker-compose.yml also use the .env remember to change according to your enviroments if needed. Be sure have docker install in your machine https://docs.docker.com/engine/install/
 
+> docker-compose.yml also use the .env remember to change according to your enviroments if needed. Be sure have docker install in your machine https://docs.docker.com/engine/install/
 
 ### Linting and Formatting
 
 To lint the code using ESLint, run:
+
 ```bash
 npm run lint
 ```
 
 To format the code using Prettier, run:
+
 ```bash
 npm run format
 ```
@@ -105,6 +110,7 @@ The ESLint configuration is defined in eslint.config.js. It includes rules for P
 ### Coverage
 
 The general coverage can be run using:
+
 ```bash
 npm run test
 ```
@@ -114,16 +120,19 @@ npm run test
 Ensure you have installed the redis in your local (When no docker conifg is used).
 
 Install Redis using Homebrew:
+
 ```bash
 brew install redis
 ```
 
 Start the Redis server:
+
 ```bash
 brew services start redis
 ```
 
 Verify that Redis is running:
+
 ```bash
 redis-cli ping
 ```
@@ -137,19 +146,17 @@ The Prettier configuration is defined in .prettierrc. It specifies the code form
 
 ## API Endpoints
 
-| Endpoint      | Body          | Authentication  | response  |
-| ------------- |:-------------:| -----:| -----:|
-| GET - /api/vehicles/{id}      | {} | YES | Look Swagger |
-| GET - /api/vehicles/{id}/doors      | {}      |   YES | Look Swagger |
-| GET - /api/vehicles/{id}/fuel | {}  |    YES | Look Swagger |
-| GET - /api/vehicles/{id}/battery | {}  |    YES | Look Swagger |
-| POST - /api/vehicles/{id}/engine | { "action": string }  |    YES | Look Swagger |
-| POST - /api/login | { "email": "user@example.com", "password": "password123" }  |    YES | Look Swagger |
-| POST - /register-user | { "email": "user@example.com", "password": "password123" }  |    NO | Look Swagger |
+| Endpoint                         |                            Body                            | Authentication |     response |
+| -------------------------------- | :--------------------------------------------------------: | -------------: | -----------: |
+| GET - /api/vehicles/{id}         |                             {}                             |            YES | Look Swagger |
+| GET - /api/vehicles/{id}/doors   |                             {}                             |            YES | Look Swagger |
+| GET - /api/vehicles/{id}/fuel    |                             {}                             |            YES | Look Swagger |
+| GET - /api/vehicles/{id}/battery |                             {}                             |            YES | Look Swagger |
+| POST - /api/vehicles/{id}/engine |                    { "action": string }                    |            YES | Look Swagger |
+| POST - /api/login                | { "email": "user@example.com", "password": "password123" } |            YES | Look Swagger |
+| POST - /register-user            | { "email": "user@example.com", "password": "password123" } |             NO | Look Swagger |
 
-``
-NOTE: Remember to Register an user before you try to get information from the endpoints
-``
+`NOTE: Remember to Register an user before you try to get information from the endpoints`
 
 ```
 Afer you run the project you can find the swagger docs in
@@ -164,6 +171,25 @@ Please do not use Bearer <Token> in Authorize button
 ## CI/CD Pipeline
 
 Was build using Github Actions for this stage we only focus on the CI and the docker build still missing the CD part to publish to a container.
+
+## Logging
+
+Este proyecto utiliza [winston](https://github.com/winstonjs/winston) para el logging. Los logs se escriben tanto en la consola como en un archivo llamado `combined.log`.
+
+### Configuración
+
+La configuración del logger se encuentra en el archivo `logger.js`. Puedes ajustar el nivel de logging y los transportes según tus necesidades.
+
+### Uso
+
+Para usar el logger en tu código, simplemente importa el módulo `logger` y utiliza los métodos de logging disponibles (`info`, `warn`, `error`, etc.).
+
+```javascript
+import logger from '../logger/logger'
+
+logger.info('Este es un mensaje informativo')
+logger.error('Este es un mensaje de error')
+```
 
 ## Author
 
